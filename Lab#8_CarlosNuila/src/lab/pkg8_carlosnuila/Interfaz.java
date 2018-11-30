@@ -5,6 +5,9 @@
  */
 package lab.pkg8_carlosnuila;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos Nuila
@@ -38,12 +41,12 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jt_apellidoCliente = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rb_visa = new javax.swing.JRadioButton();
+        rb_amex = new javax.swing.JRadioButton();
         jLabel13 = new javax.swing.JLabel();
         jt_dineroEfectivo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        rb_universidad = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jLabel15 = new javax.swing.JLabel();
         jt_numeroCuenta = new javax.swing.JTextField();
@@ -122,23 +125,35 @@ public class Interfaz extends javax.swing.JFrame {
 
         jLabel12.setText("Tarjeta de Credito:");
 
-        TarjetadeCredito.add(jRadioButton1);
-        jRadioButton1.setText("Visa");
+        TarjetadeCredito.add(rb_visa);
+        rb_visa.setText("Visa");
 
-        TarjetadeCredito.add(jRadioButton2);
-        jRadioButton2.setText("Amex");
+        TarjetadeCredito.add(rb_amex);
+        rb_amex.setText("Amex");
 
         jLabel13.setText("Efectivo:");
 
         jLabel14.setText("UNITEC:");
 
-        Universidad.add(jRadioButton3);
-        jRadioButton3.setText("Sí");
+        Universidad.add(rb_universidad);
+        rb_universidad.setText("Sí");
+        rb_universidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rb_universidadMouseClicked(evt);
+            }
+        });
 
         Universidad.add(jRadioButton4);
         jRadioButton4.setText("No");
+        jRadioButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton4MouseClicked(evt);
+            }
+        });
 
         jLabel15.setText("Número de Cuenta:");
+
+        jt_numeroCuenta.setEditable(false);
 
         jb_CrearCliente.setText("Crear Cliente");
         jb_CrearCliente.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,13 +189,13 @@ public class Interfaz extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addGroup(jd_CrearClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jd_CrearClienteLayout.createSequentialGroup()
-                                    .addComponent(jRadioButton3)
+                                    .addComponent(rb_universidad)
                                     .addGap(18, 18, 18)
                                     .addComponent(jRadioButton4))
                                 .addGroup(jd_CrearClienteLayout.createSequentialGroup()
-                                    .addComponent(jRadioButton1)
+                                    .addComponent(rb_visa)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jRadioButton2))
+                                    .addComponent(rb_amex))
                                 .addComponent(jt_apellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jt_nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jt_dineroEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -212,8 +227,8 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jd_CrearClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rb_visa)
+                    .addComponent(rb_amex))
                 .addGap(18, 18, 18)
                 .addGroup(jd_CrearClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -221,7 +236,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jd_CrearClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jRadioButton3)
+                    .addComponent(rb_universidad)
                     .addComponent(jRadioButton4))
                 .addGap(18, 18, 18)
                 .addGroup(jd_CrearClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -310,7 +325,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
         );
 
         pack();
@@ -328,19 +343,68 @@ public class Interfaz extends javax.swing.JFrame {
         jd_CrearCliente.pack();
         jd_CrearCliente.setModal(true);
         jd_CrearCliente.setVisible(true);
-        
+
     }//GEN-LAST:event_jb_crearclienteMouseClicked
 
     private void jb_CrearClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_CrearClienteMouseClicked
         // TODO add your handling code here:
         AdministrarCliente ac = new AdministrarCliente("./Clientes.cans");
         ac.cargarArchivo();
-        try{
+        try {
             String nombre = jt_nombreCliente.getText();
-        } catch(Exception e){
+            String apellido = jt_apellidoCliente.getText();
+            String tarjetaCredito = "";
+            if (rb_amex.isSelected()) {
+                tarjetaCredito = "Amex";
+            } else {
+                tarjetaCredito = "Visa";
+            }
+            double efectivo = Double.parseDouble(jt_dineroEfectivo.getText());
+            String universidad = "";
+            int numeroCuenta = -1;
+            if (rb_universidad.isSelected()) {
+                universidad = "UNITEC";
+                ArrayList<Cliente> temp = ac.getListaClientes();
+                numeroCuenta = Integer.parseInt(jt_numeroCuenta.getText());
+                int flag = 0;
+                for (Cliente temp2 : temp) {
+                    if (temp2.getNumeroCuenta() == numeroCuenta){
+                        flag = 1;
+                    }
+                }
+                if (flag == 1){
+                    JOptionPane.showMessageDialog(jd_CrearCliente, "Ese numero de cuenta ya existe");
+                    jt_numeroCuenta.setText("");
+                }
+            }
             
+            Cliente nuevoCliente = new Cliente(nombre, apellido, tarjetaCredito, 0, efectivo, universidad, numeroCuenta);
+            ac.setCliente(nuevoCliente);
+            ac.escribirArchivo();
+            
+            jt_nombreCliente.setText("");
+            jt_apellidoCliente.setText("");
+            rb_visa.setSelected(true);
+            rb_amex.setSelected(false);
+            rb_universidad.setSelected(true);
+            jRadioButton4.setSelected(false);
+            jt_dineroEfectivo.setText("");
+            jt_numeroCuenta.setText("");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(jd_CrearCliente, "Ocurrió un error fatal");
         }
     }//GEN-LAST:event_jb_CrearClienteMouseClicked
+
+    private void rb_universidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rb_universidadMouseClicked
+        // TODO add your handling code here:
+        jt_numeroCuenta.setEditable(true);
+    }//GEN-LAST:event_rb_universidadMouseClicked
+
+    private void jRadioButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton4MouseClicked
+        // TODO add your handling code here:
+        jt_numeroCuenta.setText("");
+        jt_numeroCuenta.setEditable(false);
+    }//GEN-LAST:event_jRadioButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -396,9 +460,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JButton jb_CrearCliente;
     private javax.swing.JButton jb_clientes;
@@ -422,5 +483,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel lb_estadoMesa2;
     private javax.swing.JLabel lb_estadoMesa3;
     private javax.swing.JLabel lb_estadoMesa4;
+    private javax.swing.JRadioButton rb_amex;
+    private javax.swing.JRadioButton rb_universidad;
+    private javax.swing.JRadioButton rb_visa;
     // End of variables declaration//GEN-END:variables
 }

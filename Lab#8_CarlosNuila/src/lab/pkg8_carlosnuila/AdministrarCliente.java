@@ -30,7 +30,7 @@ public class AdministrarCliente {
         return listaClientes;
     }
 
-    public void setListaPersonas(ArrayList<Cliente> listaClientes) {
+    public void setListaClientes(ArrayList<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
 
@@ -48,7 +48,7 @@ public class AdministrarCliente {
     }
 
     //extra mutador
-    public void setPersona(Cliente c) {
+    public void setCliente(Cliente c) {
         this.listaClientes.add(c);
     }
 

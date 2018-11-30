@@ -97,14 +97,14 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rb_universidad" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rb_visa" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rb_amex" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jt_apellidoCliente" min="-2" pref="115" max="-2" attributes="0"/>
                                   <Component id="jt_nombreCliente" min="-2" pref="166" max="-2" attributes="0"/>
@@ -148,8 +148,8 @@
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rb_visa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rb_amex" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -159,7 +159,7 @@
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rb_universidad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -202,7 +202,7 @@
             <Property name="text" type="java.lang.String" value="Tarjeta de Credito:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+        <Component class="javax.swing.JRadioButton" name="rb_visa">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="TarjetadeCredito"/>
@@ -210,7 +210,7 @@
             <Property name="text" type="java.lang.String" value="Visa"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+        <Component class="javax.swing.JRadioButton" name="rb_amex">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="TarjetadeCredito"/>
@@ -230,13 +230,16 @@
             <Property name="text" type="java.lang.String" value="UNITEC:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+        <Component class="javax.swing.JRadioButton" name="rb_universidad">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="Universidad"/>
             </Property>
             <Property name="text" type="java.lang.String" value="S&#xed;"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rb_universidadMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButton4">
           <Properties>
@@ -245,6 +248,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="No"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton4MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
@@ -252,6 +258,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jt_numeroCuenta">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jb_CrearCliente">
           <Properties>
@@ -295,7 +304,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="434" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
