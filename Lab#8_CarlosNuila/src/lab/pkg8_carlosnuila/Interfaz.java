@@ -276,7 +276,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         lb_estadoMesa1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(lb_estadoMesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 160, 20));
-        jPanel1.add(jp_mesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 280, 20));
+        jPanel1.add(jp_mesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 280, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Mesa 2");
@@ -288,7 +288,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         lb_estadoMesa2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(lb_estadoMesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 160, 20));
-        jPanel1.add(jp_mesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 280, 20));
+        jPanel1.add(jp_mesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 280, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Mesa 3");

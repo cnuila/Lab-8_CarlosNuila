@@ -392,7 +392,7 @@
         <Component class="javax.swing.JProgressBar" name="jp_mesa1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="290" y="110" width="280" height="20"/>
+              <AbsoluteConstraints x="320" y="110" width="280" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -437,7 +437,7 @@
         <Component class="javax.swing.JProgressBar" name="jp_mesa2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="290" y="240" width="280" height="20"/>
+              <AbsoluteConstraints x="320" y="240" width="280" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
