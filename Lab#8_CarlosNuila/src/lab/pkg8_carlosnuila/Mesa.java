@@ -5,6 +5,7 @@
  */
 package lab.pkg8_carlosnuila;
 
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
@@ -14,27 +15,28 @@ import javax.swing.JProgressBar;
  */
 public class Mesa {
     
-    private int cantidadenMesa;
     private JLabel estado;
     private JProgressBar progressBarmesa;
+    private ArrayList<Cliente> listaClienteMesa = new ArrayList();
 
     public Mesa() {
     }
 
-    public Mesa(int cantidadenMesa, JLabel estado, JProgressBar progressBarmesa) {
-        this.cantidadenMesa = cantidadenMesa;
+    public Mesa(JLabel estado, JProgressBar progressBarmesa) {
         this.estado = estado;
         this.progressBarmesa = progressBarmesa;
     }
 
-    public int getCantidadenMesa() {
-        return cantidadenMesa;
+    public ArrayList<Cliente> getListaClienteMesa() {
+        return listaClienteMesa;
     }
 
-    public void setCantidadenMesa(int cantidadenMesa) {
-        this.cantidadenMesa = cantidadenMesa;
+    public void setListaClienteMesa(ArrayList<Cliente> listaClienteMesa) {
+        this.listaClienteMesa = listaClienteMesa;
     }
 
+    
+    
     public JLabel getEstado() {
         return estado;
     }

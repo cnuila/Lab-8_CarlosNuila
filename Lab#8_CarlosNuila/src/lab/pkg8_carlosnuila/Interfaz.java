@@ -276,6 +276,10 @@ public class Interfaz extends javax.swing.JFrame {
 
         lb_estadoMesa1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(lb_estadoMesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 160, 20));
+
+        jp_mesa1.setMaximum(15);
+        jp_mesa1.setString(Integer.toString(jp_mesa1.getValue())+" Minutos");
+        jp_mesa1.setStringPainted(true);
         jPanel1.add(jp_mesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 280, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -288,6 +292,9 @@ public class Interfaz extends javax.swing.JFrame {
 
         lb_estadoMesa2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(lb_estadoMesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 160, 20));
+
+        jp_mesa2.setString(Integer.toString(jp_mesa2.getValue())+" Minutos");
+        jp_mesa2.setStringPainted(true);
         jPanel1.add(jp_mesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 280, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -300,6 +307,9 @@ public class Interfaz extends javax.swing.JFrame {
 
         lb_estadoMesa3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(lb_estadoMesa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 160, 20));
+
+        jp_mesa3.setString(Integer.toString(jp_mesa3.getValue())+" Minutos");
+        jp_mesa3.setStringPainted(true);
         jPanel1.add(jp_mesa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 280, 20));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -312,9 +322,17 @@ public class Interfaz extends javax.swing.JFrame {
 
         lb_estadoMesa4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(lb_estadoMesa4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 160, 20));
+
+        jp_mesa4.setString(Integer.toString(jp_mesa4.getValue())+" Minutos");
+        jp_mesa4.setStringPainted(true);
         jPanel1.add(jp_mesa4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 280, 20));
 
         jb_iniciarSimulacion.setText("Iniciar");
+        jb_iniciarSimulacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_iniciarSimulacionMouseClicked(evt);
+            }
+        });
         jPanel1.add(jb_iniciarSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -406,6 +424,19 @@ public class Interfaz extends javax.swing.JFrame {
         jt_numeroCuenta.setEditable(false);
     }//GEN-LAST:event_jRadioButton4MouseClicked
 
+    private void jb_iniciarSimulacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_iniciarSimulacionMouseClicked
+        // TODO add your handling code here:
+        AdministrarCliente ac = new AdministrarCliente("./Clientes.cans");
+        ac.cargarArchivo();
+        clientesCreados = ac.getListaClientes();
+        System.out.println(clientesCreados);
+        HiloHora hiloHora = new HiloHora(jb_hora);
+        hiloHora.start();
+        Mesa mesa1 = new Mesa(lb_estadoMesa1, jp_mesa1);
+        AdministrarBar adminMesa1 = new AdministrarBar(mesa1, clientesCreados);
+        adminMesa1.start();
+    }//GEN-LAST:event_jb_iniciarSimulacionMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -440,6 +471,8 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
     }
+    
+    ArrayList<Cliente> clientesCreados;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup TarjetadeCredito;
