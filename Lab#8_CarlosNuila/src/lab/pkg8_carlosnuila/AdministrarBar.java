@@ -6,6 +6,7 @@
 package lab.pkg8_carlosnuila;
 
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
@@ -19,10 +20,12 @@ public class AdministrarBar extends Thread {
     private JProgressBar progressBar;
     private JLabel label;
     private ArrayList<Cliente> clientesCreados;
+    private ArrayList<Comida> listaComida;
     private boolean vive;
 
-    public AdministrarBar(Mesa mesa, ArrayList<Cliente> clientesCreados) {
+    public AdministrarBar(Mesa mesa, ArrayList<Cliente> clientesCreados, ArrayList<Comida> listaComida) {
         this.mesa = mesa;
+        this.listaComida = listaComida;
         this.clientesCreados = clientesCreados;
         this.vive = true;
     }
@@ -67,7 +70,19 @@ public class AdministrarBar extends Thread {
                 }
                 if (label.getText().equals("Ordenando")) {
                     for (int i = 0; i < clienteMesa.size(); i++) {
+                        Random r = new Random();
+                        int numero = 1 + r.nextInt(11);
+                        Comida comidaActual = listaComida.get(numero);
+                        Cliente clienteActual = clientesCreados.get(i);
+                        double efectivo = clientesCreados.get(i).getDineroEfectivo();
+                        double cargo = clientesCreados.get(i).getCargoTarjeta();
                         
+                        
+                        double efectivoquitar = 0;
+                        
+                        if (efectivo <= comidaActual.getPrecio()){
+                            efectivoquitar = ()
+                        }
                     }
                 }
 

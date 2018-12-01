@@ -599,10 +599,15 @@ public class Interfaz extends javax.swing.JFrame {
         ArrayList<Cliente> clientesCreados;
         ac1.cargarArchivo();
         clientesCreados = ac1.getListaClientes();
+        
+        AdministrarComida admimComida = new AdministrarComida("./Comida.cans");
+        admimComida.cargarArchivo();
+        ArrayList<Comida> listaComida = admimComida.getListaComida() ;
+        
         HiloHora hiloHora = new HiloHora(jb_hora);
         hiloHora.start();
         Mesa mesa1 = new Mesa(lb_estadoMesa1, jp_mesa1);
-        AdministrarBar adminMesa1 = new AdministrarBar(mesa1, clientesCreados);
+        AdministrarBar adminMesa1 = new AdministrarBar(mesa1, clientesCreados, listaComida);
         adminMesa1.start();
     }//GEN-LAST:event_jb_iniciarSimulacionMouseClicked
 

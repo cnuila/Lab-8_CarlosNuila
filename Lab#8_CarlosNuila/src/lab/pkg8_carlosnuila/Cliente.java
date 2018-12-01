@@ -19,7 +19,7 @@ public class Cliente implements Serializable {
     private String tarjetaCredito;
     private double cargoTarjeta;
     private double dineroEfectivo;
-    private ArrayList<String> cosasOrdenadas = new ArrayList();
+    private ArrayList<Comida> cosasOrdenadas = new ArrayList();
     private String universidad;
     private int numeroCuenta;
     
@@ -78,11 +78,11 @@ public class Cliente implements Serializable {
         this.dineroEfectivo = dineroEfectivo;
     }
 
-    public ArrayList<String> getCosasOrdenadas() {
+    public ArrayList<Comida> getCosasOrdenadas() {
         return cosasOrdenadas;
     }
 
-    public void setCosasOrdenadas(ArrayList<String> cosasOrdenadas) {
+    public void setCosasOrdenadas(ArrayList<Comida> cosasOrdenadas) {
         this.cosasOrdenadas = cosasOrdenadas;
     }
 
