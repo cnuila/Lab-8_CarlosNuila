@@ -102,9 +102,12 @@ public class Cliente implements Serializable {
         this.numeroCuenta = numeroCuenta;
     }
 
+    public String toString2() {
+        return nombre + " " + apellido + ":\n" + cosasOrdenadas;
+    }
     @Override
     public String toString() {
-        return nombre + " " + apellido + ":\n" + cosasOrdenadas;
+        return nombre + " " + apellido;
     }
     
     

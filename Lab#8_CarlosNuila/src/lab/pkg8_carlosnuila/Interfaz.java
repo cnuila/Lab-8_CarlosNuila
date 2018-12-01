@@ -6,7 +6,9 @@
 package lab.pkg8_carlosnuila;
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +21,20 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
+        AdministrarComida admimComida = new AdministrarComida("./Comida.cans");
+        admimComida.cargarArchivo();
+        admimComida.setComida(new Comida("Hamburguesas", 20, 75, 100));
+        admimComida.setComida(new Comida("Sandwiches", 15, 90, 100));
+        admimComida.setComida(new Comida("Boneless", 12, 90, 100));
+        admimComida.setComida(new Comida("Almuerzo Normal", 25, 100, 100));
+        admimComida.setComida(new Comida("Nachos", 20, 100, 100));
+        admimComida.setComida(new Comida("Alitas", 20, 120, 100));
+        admimComida.setComida(new Comida("Baleadas Normal", 15, 15, 100));
+        admimComida.setComida(new Comida("Baleadas con Todo", 20, 35, 100));
+        admimComida.setComida(new Comida("Gringas", 17, 55, 100));
+        admimComida.setComida(new Comida("Bebidas", 0, 90, 100));
+        admimComida.setComida(new Comida("La Excepcion en Rocas", 0, 150, 100));
+        admimComida.escribirArchivo();
     }
 
     /**
@@ -53,6 +69,22 @@ public class Interfaz extends javax.swing.JFrame {
         jb_CrearCliente = new javax.swing.JButton();
         TarjetadeCredito = new javax.swing.ButtonGroup();
         Universidad = new javax.swing.ButtonGroup();
+        jd_Inventario = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jd_modificarClientes = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaClientes = new javax.swing.JList<>();
+        jLabel16 = new javax.swing.JLabel();
+        jt_efectivoModificar = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jt_cargoModificar = new javax.swing.JTextField();
+        jb_modificarClientete = new javax.swing.JButton();
+        jd_eliminarCliente = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaEliminar = new javax.swing.JList<>();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jb_clientes = new javax.swing.JButton();
         jb_inventario = new javax.swing.JButton();
@@ -85,8 +117,18 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         jb_modificarCliente.setText("Modificar Cliente");
+        jb_modificarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_modificarClienteMouseClicked(evt);
+            }
+        });
 
         jb_eliminarCliente.setText("Eliminar Cliente");
+        jb_eliminarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_eliminarClienteMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_ClientesLayout = new javax.swing.GroupLayout(jd_Clientes.getContentPane());
         jd_Clientes.getContentPane().setLayout(jd_ClientesLayout);
@@ -247,6 +289,157 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Alimento", "Tiempo", "Precio", "Cantidad"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("Alimento");
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setHeaderValue("Tiempo");
+        }
+
+        jButton1.setText("Modificar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_InventarioLayout = new javax.swing.GroupLayout(jd_Inventario.getContentPane());
+        jd_Inventario.getContentPane().setLayout(jd_InventarioLayout);
+        jd_InventarioLayout.setHorizontalGroup(
+            jd_InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_InventarioLayout.createSequentialGroup()
+                .addGroup(jd_InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_InventarioLayout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_InventarioLayout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(jButton1)))
+                .addContainerGap(74, Short.MAX_VALUE))
+        );
+        jd_InventarioLayout.setVerticalGroup(
+            jd_InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_InventarioLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jButton1)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        listaClientes.setModel(new DefaultListModel());
+        listaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaClientesMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(listaClientes);
+
+        jLabel16.setText("Efectivo:");
+
+        jLabel17.setText("Cargo:");
+
+        jb_modificarClientete.setText("Modificar");
+        jb_modificarClientete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_modificarClienteteMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_modificarClientesLayout = new javax.swing.GroupLayout(jd_modificarClientes.getContentPane());
+        jd_modificarClientes.getContentPane().setLayout(jd_modificarClientesLayout);
+        jd_modificarClientesLayout.setHorizontalGroup(
+            jd_modificarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_modificarClientesLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jd_modificarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_modificarClientesLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jd_modificarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addGap(18, 18, 18)
+                        .addGroup(jd_modificarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jt_efectivoModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(jt_cargoModificar)))
+                    .addGroup(jd_modificarClientesLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jb_modificarClientete)))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jd_modificarClientesLayout.setVerticalGroup(
+            jd_modificarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_modificarClientesLayout.createSequentialGroup()
+                .addGroup(jd_modificarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_modificarClientesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_modificarClientesLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(jd_modificarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jt_efectivoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addGroup(jd_modificarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(jt_cargoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(65, 65, 65)
+                        .addComponent(jb_modificarClientete)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        listaEliminar.setModel(new DefaultListModel());
+        jScrollPane3.setViewportView(listaEliminar);
+
+        jButton2.setText("Eliminar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_eliminarClienteLayout = new javax.swing.GroupLayout(jd_eliminarCliente.getContentPane());
+        jd_eliminarCliente.getContentPane().setLayout(jd_eliminarClienteLayout);
+        jd_eliminarClienteLayout.setHorizontalGroup(
+            jd_eliminarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_eliminarClienteLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(jButton2)
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+        jd_eliminarClienteLayout.setVerticalGroup(
+            jd_eliminarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_eliminarClienteLayout.createSequentialGroup()
+                .addGroup(jd_eliminarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_eliminarClienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_eliminarClienteLayout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jButton2)))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -260,6 +453,11 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.add(jb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         jb_inventario.setText("Inventario");
+        jb_inventario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_inventarioMouseClicked(evt);
+            }
+        });
         jPanel1.add(jb_inventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
 
         jb_hora.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -386,20 +584,20 @@ public class Interfaz extends javax.swing.JFrame {
                 numeroCuenta = Integer.parseInt(jt_numeroCuenta.getText());
                 int flag = 0;
                 for (Cliente temp2 : temp) {
-                    if (temp2.getNumeroCuenta() == numeroCuenta){
+                    if (temp2.getNumeroCuenta() == numeroCuenta) {
                         flag = 1;
                     }
                 }
-                if (flag == 1){
+                if (flag == 1) {
                     JOptionPane.showMessageDialog(jd_CrearCliente, "Ese numero de cuenta ya existe");
                     jt_numeroCuenta.setText("");
                 }
             }
-            
+
             Cliente nuevoCliente = new Cliente(nombre, apellido, tarjetaCredito, 0, efectivo, universidad, numeroCuenta);
             ac.setCliente(nuevoCliente);
             ac.escribirArchivo();
-            
+
             jt_nombreCliente.setText("");
             jt_apellidoCliente.setText("");
             rb_visa.setSelected(true);
@@ -426,16 +624,115 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jb_iniciarSimulacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_iniciarSimulacionMouseClicked
         // TODO add your handling code here:
-        AdministrarCliente ac = new AdministrarCliente("./Clientes.cans");
-        ac.cargarArchivo();
-        clientesCreados = ac.getListaClientes();
-        System.out.println(clientesCreados);
+        AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+        ArrayList<Cliente> clientesCreados;
+        ac1.cargarArchivo();
+        clientesCreados = ac1.getListaClientes();
         HiloHora hiloHora = new HiloHora(jb_hora);
         hiloHora.start();
         Mesa mesa1 = new Mesa(lb_estadoMesa1, jp_mesa1);
         AdministrarBar adminMesa1 = new AdministrarBar(mesa1, clientesCreados);
         adminMesa1.start();
     }//GEN-LAST:event_jb_iniciarSimulacionMouseClicked
+
+    private void jb_inventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_inventarioMouseClicked
+        // TODO add your handling code here:
+        AdministrarComida admimComida = new AdministrarComida("./Comida.cans");
+        admimComida.cargarArchivo();
+        ArrayList<Comida> listaComida = admimComida.getListaComida() ;
+        for (Comida t : listaComida) {
+            Object row[] = {t.getNombre(), t.getTiempo(), t.getPrecio(), t.getCantidad()};
+            DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+            m.addRow(row);
+            jTable1.setModel(m);
+        }
+        jd_Inventario.pack();
+        jd_Inventario.setModal(true);
+        jd_Inventario.setVisible(true);
+    }//GEN-LAST:event_jb_inventarioMouseClicked
+
+    private void jb_modificarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_modificarClienteMouseClicked
+        // TODO add your handling code here:
+        AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+        ArrayList<Cliente> clientesCreados;
+        ac1.cargarArchivo();
+        clientesCreados = ac1.getListaClientes();
+        DefaultListModel modeloLista = (DefaultListModel) listaClientes.getModel();
+        for (Cliente temp : clientesCreados) {
+            modeloLista.addElement(temp);
+        }
+        listaClientes.setModel(modeloLista);
+        jd_modificarClientes.pack();
+        jd_modificarClientes.setModal(true);
+        jd_modificarClientes.setVisible(true);
+    }//GEN-LAST:event_jb_modificarClienteMouseClicked
+
+    private void jb_modificarClienteteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_modificarClienteteMouseClicked
+        // TODO add your handling code here:
+        if (listaClientes.getSelectedIndex() >= 0) {
+            try {
+                AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+                ArrayList<Cliente> clientesCreados;
+                ac1.cargarArchivo();
+                clientesCreados = ac1.getListaClientes();
+                double cargo = Double.parseDouble(jt_cargoModificar.getText());
+                double efectivo = Double.parseDouble(jt_efectivoModificar.getText());
+                clientesCreados.get(listaClientes.getSelectedIndex()).setCargoTarjeta(cargo);
+                clientesCreados.get(listaClientes.getSelectedIndex()).setDineroEfectivo(efectivo);
+                ac1.escribirArchivo();
+                JOptionPane.showMessageDialog(jd_modificarClientes, "Cliente modificado");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(jd_modificarClientes, "Error fatal");
+            }
+        } else {
+            JOptionPane.showMessageDialog(jd_modificarClientes, "Debe seleccionar a alguien en la lista");
+        }
+    }//GEN-LAST:event_jb_modificarClienteteMouseClicked
+
+    private void listaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaClientesMouseClicked
+        // TODO add your handling code here:
+        AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+        ArrayList<Cliente> clientesCreados;
+        ac1.cargarArchivo();
+        clientesCreados = ac1.getListaClientes();
+        jt_efectivoModificar.setText(String.valueOf(((Cliente) clientesCreados.get(listaClientes.getSelectedIndex())).getDineroEfectivo()));
+        jt_cargoModificar.setText(String.valueOf(((Cliente) clientesCreados.get(listaClientes.getSelectedIndex())).getCargoTarjeta()));
+    }//GEN-LAST:event_listaClientesMouseClicked
+
+    private void jb_eliminarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_eliminarClienteMouseClicked
+        // TODO add your handling code here:
+        AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+        ArrayList<Cliente> clientesCreados;
+        ac1.cargarArchivo();
+        clientesCreados = ac1.getListaClientes();
+        DefaultListModel modeloLista = (DefaultListModel) listaEliminar.getModel();
+        for (Cliente temp : clientesCreados) {
+            modeloLista.addElement(temp);
+        }
+        listaEliminar.setModel(modeloLista);
+        jd_eliminarCliente.pack();
+        jd_eliminarCliente.setModal(true);
+        jd_eliminarCliente.setVisible(true);
+
+    }//GEN-LAST:event_jb_eliminarClienteMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        if (listaClientes.getSelectedIndex() >= 0) {
+            AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+            ArrayList<Cliente> clientesCreados;
+            ac1.cargarArchivo();
+            clientesCreados = ac1.getListaClientes();
+            clientesCreados.remove(listaClientes.getSelectedIndex());
+            ac1.escribirArchivo();
+        } else {
+            JOptionPane.showMessageDialog(jd_modificarClientes, "Debe seleccionar a alguien en la lista");
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -471,12 +768,12 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
     }
-    
-    ArrayList<Cliente> clientesCreados;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup TarjetadeCredito;
     private javax.swing.ButtonGroup Universidad;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -484,6 +781,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -494,6 +793,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton jb_CrearCliente;
     private javax.swing.JButton jb_clientes;
     private javax.swing.JButton jb_crearcliente;
@@ -502,20 +805,28 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton jb_iniciarSimulacion;
     private javax.swing.JButton jb_inventario;
     private javax.swing.JButton jb_modificarCliente;
+    private javax.swing.JButton jb_modificarClientete;
     private javax.swing.JDialog jd_Clientes;
     private javax.swing.JDialog jd_CrearCliente;
+    private javax.swing.JDialog jd_Inventario;
+    private javax.swing.JDialog jd_eliminarCliente;
+    private javax.swing.JDialog jd_modificarClientes;
     private javax.swing.JProgressBar jp_mesa1;
     private javax.swing.JProgressBar jp_mesa2;
     private javax.swing.JProgressBar jp_mesa3;
     private javax.swing.JProgressBar jp_mesa4;
     private javax.swing.JTextField jt_apellidoCliente;
+    private javax.swing.JTextField jt_cargoModificar;
     private javax.swing.JTextField jt_dineroEfectivo;
+    private javax.swing.JTextField jt_efectivoModificar;
     private javax.swing.JTextField jt_nombreCliente;
     private javax.swing.JTextField jt_numeroCuenta;
     private javax.swing.JLabel lb_estadoMesa1;
     private javax.swing.JLabel lb_estadoMesa2;
     private javax.swing.JLabel lb_estadoMesa3;
     private javax.swing.JLabel lb_estadoMesa4;
+    private javax.swing.JList<String> listaClientes;
+    private javax.swing.JList<String> listaEliminar;
     private javax.swing.JRadioButton rb_amex;
     private javax.swing.JRadioButton rb_universidad;
     private javax.swing.JRadioButton rb_visa;

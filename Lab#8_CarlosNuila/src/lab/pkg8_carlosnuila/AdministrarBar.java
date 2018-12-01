@@ -18,12 +18,12 @@ public class AdministrarBar extends Thread {
     private Mesa mesa;
     private JProgressBar progressBar;
     private JLabel label;
-    private ArrayList<Cliente> clientesCreado;
+    private ArrayList<Cliente> clientesCreados;
     private boolean vive;
 
-    public AdministrarBar(Mesa mesa, ArrayList<Cliente> clientesCreado) {
+    public AdministrarBar(Mesa mesa, ArrayList<Cliente> clientesCreados) {
         this.mesa = mesa;
-        this.clientesCreado = clientesCreado;
+        this.clientesCreados = clientesCreados;
         this.vive = true;
     }
 
@@ -42,26 +42,36 @@ public class AdministrarBar extends Thread {
         while (vive) {
             ArrayList<Cliente> clienteMesa = mesa.getListaClienteMesa();
             String estado = "";
-            for (int i = 0; i < clientesCreado.size(); i++) {
-                
-                clienteMesa.add(clientesCreado.get(i));
-                clientesCreado.remove(i);
+            for (int i = 0; i < clientesCreados.size(); i++) {
+                clienteMesa.add(clientesCreados.get(i));
+                clientesCreados.remove(i);
+                AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+                ac1.escribirArchivo();
                 if (clienteMesa.size() == 4) {
-                    i = clientesCreado.size();
+                    i = clientesCreados.size();
                 }
             }
+            if (clienteMesa.size() <= 4) {
+                estado = "Llenando Mesa";
+                label.setText(estado);
+                if (label.getText().equals("Llenando Mesa")) {
+                    progressBar.setMaximum(15);
+                    progressBar.setValue(progressBar.getValue() + 1);
+                    progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
+                    if (progressBar.getValue() == 15) {
+                        progressBar.setValue(0);
+                        progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
+                        estado = "Ordenando";
+                        label.setText(estado);
+                    }
+                }
+                if (label.getText().equals("Ordenando")) {
+                    for (int i = 0; i < clienteMesa.size(); i++) {
+                        
+                    }
+                }
 
-            progressBar.setMaximum(15);
-            System.out.println(progressBar.getValue());
-            progressBar.setValue(progressBar.getValue() + 1);
-            progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
-            if (progressBar.getValue() == 15){
-                progressBar.setValue(0);
-                progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
             }
-            
-            
-            
             try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
@@ -70,4 +80,8 @@ public class AdministrarBar extends Thread {
         }
     }
 
+    public ArrayList<String> ordenar(Cliente cliente, ArrayList<String> temporal){
+        
+        return temporal;
+    }
 }
