@@ -84,8 +84,6 @@ public class AdministrarBar extends Thread {
                             Random r = new Random();
                             int numero = 1 + r.nextInt(11);
                             Comida comidaActual = listaComida.get(numero);
-                            int numero2 = 1 + r.nextInt(11);
-                            Comida comidaActual2 = listaComida.get(numero);
                             Cliente clienteActual = clientesCreados.get(i);
                             double efectivo = clientesCreados.get(i).getDineroEfectivo();
                             double cargo = clientesCreados.get(i).getCargoTarjeta();
@@ -93,24 +91,39 @@ public class AdministrarBar extends Thread {
                             double efectivoquitar = 0;
 
                             double Precio1 = comidaActual.getPrecio();
-                            double Precio2 = comidaActual2.getPrecio();
-                            
-                            if (clienteActual.getUniversidad().equals("UNITEC")){
+
+                            if (clienteActual.getUniversidad().equals("UNITEC")) {
                                 Precio1 = Precio1 - Precio1 * 0.20;
-                                Precio2 = Precio2 - Precio2 * 0.20;
                             }
-                            if (efectivo <= (Precio1 + Precio2)) {
-                                efectivoquitar = efectivo - Precio1 - Precio2 ;
+                            if (efectivo <= Precio1) {
+                                efectivoquitar = efectivo - Precio1;
                                 clienteActual.setDineroEfectivo(efectivoquitar);
                             } else {
-                                clienteActual.setCargoTarjeta(Precio1 + Precio2);
+                                clienteActual.setCargoTarjeta(Precio1);
                             }
                             clienteActual.getCosasOrdenadas().add(comidaActual);
-                            clienteActual.getCosasOrdenadas().add(comidaActual2);
-                            
                         }
+                        int tiempoMedia = 0;
+                        int tiempoMayor = 0;
+                        for (int i = 0; i < clienteMesa.size(); i++) {
+                            tiempoMedia += clienteMesa.get(i).getCosasOrdenadas().get(0).getTiempo();
+                            if (tiempoMayor < clienteMesa.get(i).getCosasOrdenadas().get(0).getTiempo()) {
+                                tiempoMayor = clienteMesa.get(i).getCosasOrdenadas().get(0).getTiempo();
+                            }
+                        }
+                        tiempoMedia = tiempoMedia / clienteMesa.size();
+                        tiempoMedia = (int) Math.ceil(tiempoMedia);
+                        tiempoMayor = (int) Math.ceil(tiempoMayor * 0.25);
+                        int tiempoTotal = tiempoMayor + tiempoMedia;
+                        progressBar.setMaximum(tiempoTotal);
+                        progressBar.setValue(progressBar.getValue() + 1);
+                        progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
+                        estado = "Comiendo";
+                        label.setText(estado);
                     }
-
+                    if (estado.equals("Comiendo")){
+                        
+                    }
                 }
             }
             try {
