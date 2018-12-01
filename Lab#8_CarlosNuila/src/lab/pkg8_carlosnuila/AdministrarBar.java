@@ -45,15 +45,16 @@ public class AdministrarBar extends Thread {
     public void run() {
         progressBar = mesa.getProgressBarmesa();
         label = mesa.getEstado();
+        label.setText("Vacio");
         while (vive) {
             mesa.getListaClienteMesa().clear();
             ArrayList<Cliente> clienteMesa = mesa.getListaClienteMesa();
             String estado = "";
             for (int i = 0; i < clientesCreados.size(); i++) {
                 clienteMesa.add(clientesCreados.get(i));
-                //clientesCreados.remove(i);
-                //AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
-                //ac1.escribirArchivo();
+                clientesCreados.remove(i);
+                AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+                ac1.escribirArchivo();
                 if (clienteMesa.size() == 4) {
                     i = clientesCreados.size();
                 }
@@ -121,8 +122,26 @@ public class AdministrarBar extends Thread {
                         estado = "Comiendo";
                         label.setText(estado);
                     }
-                    if (estado.equals("Comiendo")){
+                    if (estado.equals("Comiendo")) {
+                        int tiempo = 0;
+                        if (clienteMesa.size() == 1) {
+                            tiempo = 30;
+                        }
+                        if (clienteMesa.size() == 2) {
+                            tiempo = 45;
+                        }
+                        if (clienteMesa.size() == 3) {
+                            tiempo = 60;
+                        }
+                        if (clienteMesa.size() == 4) {
+                            tiempo = 90;
+                        }
+                        progressBar.setMaximum(tiempo);
+                        progressBar.setValue(progressBar.getValue() + 1);
+                        progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
                         
+                        estado = "Vacio";
+                        label.setText(estado);
                     }
                 }
             }
