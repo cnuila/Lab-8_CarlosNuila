@@ -91,6 +91,8 @@ public class Interfaz extends javax.swing.JFrame {
         lb_estadoMesa4 = new javax.swing.JLabel();
         jp_mesa4 = new javax.swing.JProgressBar();
         jb_iniciarSimulacion = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        text_clientesMesa1 = new javax.swing.JTextArea();
 
         jd_Clientes.setTitle("Clientes");
 
@@ -437,19 +439,19 @@ public class Interfaz extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Mesa 1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 70, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 70, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Estado:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
 
         lb_estadoMesa1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(lb_estadoMesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 160, 20));
+        jPanel1.add(lb_estadoMesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 160, 20));
 
         jp_mesa1.setMaximum(15);
         jp_mesa1.setString(Integer.toString(jp_mesa1.getValue())+" Minutos");
         jp_mesa1.setStringPainted(true);
-        jPanel1.add(jp_mesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 280, 20));
+        jPanel1.add(jp_mesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 280, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Mesa 2");
@@ -504,11 +506,20 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jPanel1.add(jb_iniciarSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
+        text_clientesMesa1.setColumns(20);
+        text_clientesMesa1.setRows(5);
+        jScrollPane4.setViewportView(text_clientesMesa1);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 110, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,11 +575,9 @@ public class Interfaz extends javax.swing.JFrame {
                     jt_numeroCuenta.setText("");
                 }
             }
-
             Cliente nuevoCliente = new Cliente(nombre, apellido, tarjetaCredito, 0, efectivo, universidad, numeroCuenta);
             ac.setCliente(nuevoCliente);
             ac.escribirArchivo();
-
             jt_nombreCliente.setText("");
             jt_apellidoCliente.setText("");
             rb_visa.setSelected(true);
@@ -599,46 +608,44 @@ public class Interfaz extends javax.swing.JFrame {
         ArrayList<Cliente> clientesCreados;
         ac1.cargarArchivo();
         clientesCreados = ac1.getListaClientes();
-        
+
         AdministrarComida admimComida = new AdministrarComida("./Comida.cans");
         admimComida.cargarArchivo();
-        ArrayList<Comida> listaComida = admimComida.getListaComida() ;
-        
+        ArrayList<Comida> listaComida = admimComida.getListaComida();
+
         HiloHora hiloHora = new HiloHora(jb_hora);
         hiloHora.start();
         Mesa mesa1 = new Mesa(lb_estadoMesa1, jp_mesa1);
-        AdministrarBar adminMesa1 = new AdministrarBar(mesa1, clientesCreados, listaComida);
+        AdministrarBar adminMesa1 = new AdministrarBar(mesa1, clientesCreados, listaComida, text_clientesMesa1);
         adminMesa1.start();
     }//GEN-LAST:event_jb_iniciarSimulacionMouseClicked
 
     private void jb_inventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_inventarioMouseClicked
         // TODO add your handling code here:
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Descripcion", "U.V"
-            }
+                new Object[][]{},
+                new String[]{
+                    "Descripcion", "U.V"
+                }
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                 java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean[]{
                 false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         AdministrarComida admimComida = new AdministrarComida("./Comida.cans");
         admimComida.cargarArchivo();
-        ArrayList<Comida> listaComida = admimComida.getListaComida() ;
+        ArrayList<Comida> listaComida = admimComida.getListaComida();
         for (Comida t : listaComida) {
             Object row[] = {t.getNombre(), t.getTiempo(), t.getPrecio(), t.getCantidad()};
             DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
@@ -652,10 +659,12 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jb_modificarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_modificarClienteMouseClicked
         // TODO add your handling code here:
+        listaClientes.setModel(new DefaultListModel());
         AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
         ArrayList<Cliente> clientesCreados;
         ac1.cargarArchivo();
         clientesCreados = ac1.getListaClientes();
+
         DefaultListModel modeloLista = (DefaultListModel) listaClientes.getModel();
         for (Cliente temp : clientesCreados) {
             modeloLista.addElement(temp);
@@ -700,6 +709,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jb_eliminarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_eliminarClienteMouseClicked
         // TODO add your handling code here:
+        listaEliminar.setModel(new DefaultListModel());
         AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
         ArrayList<Cliente> clientesCreados;
         ac1.cargarArchivo();
@@ -719,10 +729,8 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (listaClientes.getSelectedIndex() >= 0) {
             AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
-            ArrayList<Cliente> clientesCreados;
             ac1.cargarArchivo();
-            clientesCreados = ac1.getListaClientes();
-            clientesCreados.remove(listaClientes.getSelectedIndex());
+            ac1.getListaClientes().remove(listaClientes.getSelectedIndex());
             ac1.escribirArchivo();
         } else {
             JOptionPane.showMessageDialog(jd_modificarClientes, "Debe seleccionar a alguien en la lista");
@@ -790,6 +798,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jb_CrearCliente;
     private javax.swing.JButton jb_clientes;
@@ -824,5 +833,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JRadioButton rb_amex;
     private javax.swing.JRadioButton rb_universidad;
     private javax.swing.JRadioButton rb_visa;
+    private javax.swing.JTextArea text_clientesMesa1;
     // End of variables declaration//GEN-END:variables
 }

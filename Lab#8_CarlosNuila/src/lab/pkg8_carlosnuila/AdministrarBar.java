@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -18,13 +19,15 @@ public class AdministrarBar extends Thread {
 
     private Mesa mesa;
     private JProgressBar progressBar;
+    private JTextArea textArea;
     private JLabel label;
     private ArrayList<Cliente> clientesCreados;
     private ArrayList<Comida> listaComida;
     private boolean vive;
 
-    public AdministrarBar(Mesa mesa, ArrayList<Cliente> clientesCreados, ArrayList<Comida> listaComida) {
+    public AdministrarBar(Mesa mesa, ArrayList<Cliente> clientesCreados, ArrayList<Comida> listaComida,JTextArea textArea) {
         this.mesa = mesa;
+        this.textArea = textArea;
         this.listaComida = listaComida;
         this.clientesCreados = clientesCreados;
         this.vive = true;
@@ -47,12 +50,18 @@ public class AdministrarBar extends Thread {
             String estado = "";
             for (int i = 0; i < clientesCreados.size(); i++) {
                 clienteMesa.add(clientesCreados.get(i));
-                clientesCreados.remove(i);
+                //clientesCreados.remove(i);
                 AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
                 ac1.escribirArchivo();
                 if (clienteMesa.size() == 4) {
                     i = clientesCreados.size();
                 }
+            }
+            int h = 1;
+            textArea.setText("");
+            for (Cliente temp : clienteMesa) {
+                textArea.setText(h + ") " + temp.getNombre());
+                h++;
             }
             if (clienteMesa.size() <= 4) {
                 estado = "Llenando Mesa";
@@ -81,7 +90,7 @@ public class AdministrarBar extends Thread {
                         double efectivoquitar = 0;
                         
                         if (efectivo <= comidaActual.getPrecio()){
-                            efectivoquitar = ()
+                            //efectivoquitar = ()
                         }
                     }
                 }
