@@ -637,8 +637,18 @@ public class Interfaz extends javax.swing.JFrame {
         HiloHora hiloHora = new HiloHora(jb_hora);
         hiloHora.start();
         Mesa mesa1 = new Mesa(lb_estadoMesa1, jp_mesa1);
+        Mesa mesa2 = new Mesa(lb_estadoMesa2, jp_mesa2);
+        Mesa mesa3 = new Mesa(lb_estadoMesa3, jp_mesa3);
+        Mesa mesa4 = new Mesa(lb_estadoMesa4, jp_mesa4);
         AdministrarBar adminMesa1 = new AdministrarBar(mesa1, clientesCreados, listaComida, text_clientesMesa1);
         adminMesa1.start();
+        AdministrarBar adminMesa2 = new AdministrarBar(mesa2, clientesCreados, listaComida, text_clientesMesa2);
+        adminMesa2.start();
+        AdministrarBar adminMesa3 = new AdministrarBar(mesa3, clientesCreados, listaComida, text_clientesMesa2);
+        adminMesa3.start();
+        AdministrarBar adminMesa4 = new AdministrarBar(mesa4, clientesCreados, listaComida, text_clientesMesa2);
+        adminMesa4.start();
+        
     }//GEN-LAST:event_jb_iniciarSimulacionMouseClicked
 
     private void jb_inventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_inventarioMouseClicked

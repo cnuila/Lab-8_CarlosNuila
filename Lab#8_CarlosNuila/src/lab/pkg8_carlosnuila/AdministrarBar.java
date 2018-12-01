@@ -45,16 +45,15 @@ public class AdministrarBar extends Thread {
     public void run() {
         progressBar = mesa.getProgressBarmesa();
         label = mesa.getEstado();
-        label.setText("Vacio");
         while (vive) {
             mesa.getListaClienteMesa().clear();
             ArrayList<Cliente> clienteMesa = mesa.getListaClienteMesa();
             String estado = "";
             for (int i = 0; i < clientesCreados.size(); i++) {
                 clienteMesa.add(clientesCreados.get(i));
-                clientesCreados.remove(i);
-                AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
-                ac1.escribirArchivo();
+                //clientesCreados.remove(i);
+                //AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+                //ac1.escribirArchivo();
                 if (clienteMesa.size() == 4) {
                     i = clientesCreados.size();
                 }
