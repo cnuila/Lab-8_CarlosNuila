@@ -93,6 +93,12 @@ public class Interfaz extends javax.swing.JFrame {
         jb_iniciarSimulacion = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         text_clientesMesa1 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        text_clientesMesa2 = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        text_clientesMesa3 = new javax.swing.JTextArea();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        text_clientesMesa4 = new javax.swing.JTextArea();
 
         jd_Clientes.setTitle("Clientes");
 
@@ -455,18 +461,18 @@ public class Interfaz extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Mesa 2");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 70, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 70, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Estado:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, -1, -1));
 
         lb_estadoMesa2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(lb_estadoMesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 160, 20));
+        jPanel1.add(lb_estadoMesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 160, 20));
 
         jp_mesa2.setString(Integer.toString(jp_mesa2.getValue())+" Minutos");
         jp_mesa2.setStringPainted(true);
-        jPanel1.add(jp_mesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 280, 20));
+        jPanel1.add(jp_mesa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 280, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Mesa 3");
@@ -510,20 +516,35 @@ public class Interfaz extends javax.swing.JFrame {
         text_clientesMesa1.setRows(5);
         jScrollPane4.setViewportView(text_clientesMesa1);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 110, -1));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 110, -1));
+
+        text_clientesMesa2.setColumns(20);
+        text_clientesMesa2.setRows(5);
+        jScrollPane5.setViewportView(text_clientesMesa2);
+
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 110, -1));
+
+        text_clientesMesa3.setColumns(20);
+        text_clientesMesa3.setRows(5);
+        jScrollPane6.setViewportView(text_clientesMesa3);
+
+        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 110, -1));
+
+        text_clientesMesa4.setColumns(20);
+        text_clientesMesa4.setRows(5);
+        jScrollPane7.setViewportView(text_clientesMesa4);
+
+        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
         );
 
         pack();
@@ -799,6 +820,9 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jb_CrearCliente;
     private javax.swing.JButton jb_clientes;
@@ -834,5 +858,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JRadioButton rb_universidad;
     private javax.swing.JRadioButton rb_visa;
     private javax.swing.JTextArea text_clientesMesa1;
+    private javax.swing.JTextArea text_clientesMesa2;
+    private javax.swing.JTextArea text_clientesMesa3;
+    private javax.swing.JTextArea text_clientesMesa4;
     // End of variables declaration//GEN-END:variables
 }

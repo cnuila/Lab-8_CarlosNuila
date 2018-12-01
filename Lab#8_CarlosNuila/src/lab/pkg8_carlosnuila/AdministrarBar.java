@@ -25,7 +25,7 @@ public class AdministrarBar extends Thread {
     private ArrayList<Comida> listaComida;
     private boolean vive;
 
-    public AdministrarBar(Mesa mesa, ArrayList<Cliente> clientesCreados, ArrayList<Comida> listaComida,JTextArea textArea) {
+    public AdministrarBar(Mesa mesa, ArrayList<Cliente> clientesCreados, ArrayList<Comida> listaComida, JTextArea textArea) {
         this.mesa = mesa;
         this.textArea = textArea;
         this.listaComida = listaComida;
@@ -46,55 +46,72 @@ public class AdministrarBar extends Thread {
         progressBar = mesa.getProgressBarmesa();
         label = mesa.getEstado();
         while (vive) {
+            mesa.getListaClienteMesa().clear();
             ArrayList<Cliente> clienteMesa = mesa.getListaClienteMesa();
             String estado = "";
             for (int i = 0; i < clientesCreados.size(); i++) {
                 clienteMesa.add(clientesCreados.get(i));
                 //clientesCreados.remove(i);
-                AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
-                ac1.escribirArchivo();
+                //AdministrarCliente ac1 = new AdministrarCliente("./Clientes.cans");
+                //ac1.escribirArchivo();
                 if (clienteMesa.size() == 4) {
                     i = clientesCreados.size();
                 }
             }
-            int h = 1;
-            textArea.setText("");
-            for (Cliente temp : clienteMesa) {
-                textArea.setText(h + ") " + temp.getNombre());
-                h++;
-            }
-            if (clienteMesa.size() <= 4) {
-                estado = "Llenando Mesa";
-                label.setText(estado);
-                if (label.getText().equals("Llenando Mesa")) {
-                    progressBar.setMaximum(15);
-                    progressBar.setValue(progressBar.getValue() + 1);
-                    progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
-                    if (progressBar.getValue() == 15) {
-                        progressBar.setValue(0);
-                        progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
-                        estado = "Ordenando";
-                        label.setText(estado);
-                    }
+            if (!clienteMesa.isEmpty()) {
+                int h = 1;
+                textArea.setText("");
+                for (Cliente temp : clienteMesa) {
+                    textArea.append(h + ") " + temp.getNombre() + "\n");
+                    h++;
                 }
-                if (label.getText().equals("Ordenando")) {
-                    for (int i = 0; i < clienteMesa.size(); i++) {
-                        Random r = new Random();
-                        int numero = 1 + r.nextInt(11);
-                        Comida comidaActual = listaComida.get(numero);
-                        Cliente clienteActual = clientesCreados.get(i);
-                        double efectivo = clientesCreados.get(i).getDineroEfectivo();
-                        double cargo = clientesCreados.get(i).getCargoTarjeta();
-                        
-                        
-                        double efectivoquitar = 0;
-                        
-                        if (efectivo <= comidaActual.getPrecio()){
-                            //efectivoquitar = ()
+                if (clienteMesa.size() <= 4) {
+                    estado = "Llenando Mesa";
+                    label.setText(estado);
+                    if (label.getText().equals("Llenando Mesa")) {
+                        progressBar.setMaximum(15);
+                        progressBar.setValue(progressBar.getValue() + 1);
+                        progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
+                        if (progressBar.getValue() == 15) {
+                            progressBar.setValue(0);
+                            progressBar.setString(Integer.toString(progressBar.getValue()) + " Minutos");
+                            estado = "Ordenando";
+                            label.setText(estado);
                         }
                     }
-                }
+                    if (label.getText().equals("Ordenando")) {
+                        for (int i = 0; i < clienteMesa.size(); i++) {
+                            Random r = new Random();
+                            int numero = 1 + r.nextInt(11);
+                            Comida comidaActual = listaComida.get(numero);
+                            int numero2 = 1 + r.nextInt(11);
+                            Comida comidaActual2 = listaComida.get(numero);
+                            Cliente clienteActual = clientesCreados.get(i);
+                            double efectivo = clientesCreados.get(i).getDineroEfectivo();
+                            double cargo = clientesCreados.get(i).getCargoTarjeta();
 
+                            double efectivoquitar = 0;
+
+                            double Precio1 = comidaActual.getPrecio();
+                            double Precio2 = comidaActual2.getPrecio();
+                            
+                            if (clienteActual.getUniversidad().equals("UNITEC")){
+                                Precio1 = Precio1 - Precio1 * 0.20;
+                                Precio2 = Precio2 - Precio2 * 0.20;
+                            }
+                            if (efectivo <= (Precio1 + Precio2)) {
+                                efectivoquitar = efectivo - Precio1 - Precio2 ;
+                                clienteActual.setDineroEfectivo(efectivoquitar);
+                            } else {
+                                clienteActual.setCargoTarjeta(Precio1 + Precio2);
+                            }
+                            clienteActual.getCosasOrdenadas().add(comidaActual);
+                            clienteActual.getCosasOrdenadas().add(comidaActual2);
+                            
+                        }
+                    }
+
+                }
             }
             try {
                 Thread.sleep(300);
@@ -104,8 +121,8 @@ public class AdministrarBar extends Thread {
         }
     }
 
-    public ArrayList<String> ordenar(Cliente cliente, ArrayList<String> temporal){
-        
+    public ArrayList<String> ordenar(Cliente cliente, ArrayList<String> temporal) {
+
         return temporal;
     }
 }
