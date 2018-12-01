@@ -5,16 +5,20 @@
  */
 package lab.pkg8_carlosnuila;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Carlos Nuila
  */
-public class Comida {
+public class Comida implements Serializable {
     
     private String nombre;
     private int tiempo;
     private int precio;
     private int cantidad;
+    
+    private static final long SerialVersionUID = 1008L;
 
     public Comida() {
     }

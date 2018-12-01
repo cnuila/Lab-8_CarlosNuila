@@ -21,20 +21,6 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
-        AdministrarComida admimComida = new AdministrarComida("./Comida.cans");
-        admimComida.cargarArchivo();
-        admimComida.setComida(new Comida("Hamburguesas", 20, 75, 100));
-        admimComida.setComida(new Comida("Sandwiches", 15, 90, 100));
-        admimComida.setComida(new Comida("Boneless", 12, 90, 100));
-        admimComida.setComida(new Comida("Almuerzo Normal", 25, 100, 100));
-        admimComida.setComida(new Comida("Nachos", 20, 100, 100));
-        admimComida.setComida(new Comida("Alitas", 20, 120, 100));
-        admimComida.setComida(new Comida("Baleadas Normal", 15, 15, 100));
-        admimComida.setComida(new Comida("Baleadas con Todo", 20, 35, 100));
-        admimComida.setComida(new Comida("Gringas", 17, 55, 100));
-        admimComida.setComida(new Comida("Bebidas", 0, 90, 100));
-        admimComida.setComida(new Comida("La Excepcion en Rocas", 0, 150, 100));
-        admimComida.escribirArchivo();
     }
 
     /**
@@ -72,7 +58,6 @@ public class Interfaz extends javax.swing.JFrame {
         jd_Inventario = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jd_modificarClientes = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaClientes = new javax.swing.JList<>();
@@ -313,25 +298,13 @@ public class Interfaz extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(1).setHeaderValue("Tiempo");
         }
 
-        jButton1.setText("Modificar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jd_InventarioLayout = new javax.swing.GroupLayout(jd_Inventario.getContentPane());
         jd_Inventario.getContentPane().setLayout(jd_InventarioLayout);
         jd_InventarioLayout.setHorizontalGroup(
             jd_InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_InventarioLayout.createSequentialGroup()
-                .addGroup(jd_InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_InventarioLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jd_InventarioLayout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(jButton1)))
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         jd_InventarioLayout.setVerticalGroup(
@@ -339,9 +312,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(jd_InventarioLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jButton1)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         listaClientes.setModel(new DefaultListModel());
@@ -637,6 +608,29 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jb_inventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_inventarioMouseClicked
         // TODO add your handling code here:
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Descripcion", "U.V"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         AdministrarComida admimComida = new AdministrarComida("./Comida.cans");
         admimComida.cargarArchivo();
         ArrayList<Comida> listaComida = admimComida.getListaComida() ;
@@ -730,10 +724,6 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -772,7 +762,6 @@ public class Interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup TarjetadeCredito;
     private javax.swing.ButtonGroup Universidad;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
